@@ -43,13 +43,13 @@ const server = http.createServer((req, res) => {
       let id = req.url.slice(7);
       let existingGames = getGames();
       // usar metodo findID buscar por ID, y si no existe tirar error 404
-      if (existingGames.indexOf(id)) {
+      if (existingGames.find((objeto) => objeto.uid === id)) {
         //si existe
         existingGames = existingGames.filter((objecto) => objecto.uid !== id);
         console.log(existingGames);
         writeGames(existingGames);
       } else {
-        res.writeHead(404, "Ruta no encontrada");
+        res.writeHead(404, "Game not found");
       }
 
       res.end();
